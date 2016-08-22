@@ -147,12 +147,13 @@ public class HttpEce {
     /**
      * Utility to concat byte arrays
      */
-    private byte[] concat(byte[]... arrays) {
-        int combinedLength = Arrays.stream(arrays).mapToInt(array -> array.length).sum();
+    private byte[] concat(byte[]... arrays) {        
+        int combinedLength = 0;
+        for(int i = 0; i < arrays.length; i++) {
+            combinedLength += arrays[i].length;
+        }
         int lastPos = 0;
-
         byte[] combined = new byte[combinedLength];
-
         for (byte[] array : arrays) {
             System.arraycopy(array, 0, combined, lastPos, array.length);
 
